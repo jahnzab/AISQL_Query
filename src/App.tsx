@@ -295,14 +295,17 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100">
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
-        <div className="container">
+    <div className="d-flex flex-column min-vh-100 w-100" style={{ marginRight:"5px", marginLeft:"5px", width: "100vw", maxWidth: "100vw" }}>
+
+    {/* Navbar */}
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm w-100" style={{ marginRight:"-50px", zIndex: 1050 }}>
+
+      <div className="container-fluid p-0 m-0" style={{ width: "100vw", maxWidth: "100vw" }}>
+  
           <a className="navbar-brand d-flex align-items-center" href="#" onClick={() => scrollToSection(homeRef, "home")}>
-            <img src="http://localhost:8000/images/langs.png"  alt="LangChain SQL" className="me-2" style={{ borderRadius: '8px' }} />
-            <h1><span className="d-none d-sm-inline"></span></h1>
-            <span className="d-inline d-sm-none">LC SQL</span>
+            <img src="http://localhost:8000/images/langs.png"  alt="LangChain SQL" className="me-2" style={{ borderRadius: '8px', maxWidth:"100%", marginLeft:"10px"}} />
+            {/* <h1><span className="d-none d-sm-inline"></span></h1> */}
+            {/* <span className="d-inline d-sm-none">LC SQL</span> */}
           </a>
           <button 
             className="navbar-toggler" 
@@ -355,45 +358,48 @@ const App: React.FC = () => {
       </nav>
 
       {/* Hero Banner */}
-      <header className="bg-dark text-white py-5" ref={homeRef}>
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-7 col-md-6 mb-4 mb-md-0">
-              <h1 className="display-4 fw-bold mb-4">AI-Powered SQL Assistant</h1>
-              <p className="lead mb-4">
-                Transform natural language into powerful SQL queries with our LangChain-powered intelligence.
-                No more complex SQL syntax - just ask questions in plain English.
-              </p>
-              <div className="d-flex flex-wrap gap-2">
-                <button 
-                  className="btn btn-primary btn-lg"
-                  onClick={() => scrollToSection(queryRef, "query")}
-                >
-                  <i className="bi bi-search me-2"></i>
-                  Start Querying
-                </button>
-                <button 
-                  className="btn btn-outline-light btn-lg"
-                  onClick={() => scrollToSection(infoRef, "info")}
-                >
-                  <i className="bi bi-info-circle me-2"></i>
-                  Learn More
-                </button>
-              </div>
-            </div>
-            <div className="col-lg-5 col-md-6 text-center">
-            <img 
-  src="http://localhost:8000/images/visua.png" 
-  alt="AI Query Visualization" 
-  className="img-fluid rounded shadow-lg"
-  style={{ maxWidth: '100%', height: 'auto' }}
-/>
-
-
-            </div>
-          </div>
+      <header 
+  className="py-5" 
+  ref={homeRef} 
+  style={{ backgroundColor: "#d3d3d3 !important", color: "#000 !important" }} // Force Grey Background
+>
+  <div className="container" style={{border:"solid 4px blue"}}>
+    <div className="row align-items-center">
+      <div className="col-lg-7 col-md-6 mb-4 mb-md-0">
+        <h1 className="display-4 fw-bold mb-4">AI-Powered SQL Assistant</h1>
+        <p className="lead mb-4">
+          Transform natural language into powerful SQL queries with our LangChain-powered intelligence.
+          No more complex SQL syntax - just ask questions in plain English.
+        </p>
+        <div className="d-flex flex-wrap gap-2">
+          <button 
+            className="btn btn-primary btn-lg"
+            onClick={() => scrollToSection(queryRef, "query")}
+          >
+            <i className="bi bi-search me-2"></i>
+            Start Querying
+          </button>
+          <button 
+            className="btn btn-outline-dark btn-lg"
+            onClick={() => scrollToSection(infoRef, "info")}
+          >
+            <i className="bi bi-info-circle me-2"></i>
+            Learn More
+          </button>
         </div>
-      </header>
+      </div>
+      <div className="col-lg-5 col-md-6 text-center">
+        <img 
+          src="http://localhost:8000/images/visua.png" 
+          alt="AI Query Visualization" 
+          className="img-fluid rounded shadow-lg"
+          style={{ maxWidth: '100%', height: 'auto',marginRight:"-25px" }}
+        />
+      </div>
+    </div>
+  </div>
+</header>
+
 
       <div className="container py-5" ref={queryRef} id="query-section">
         <div className="row justify-content-center">
@@ -559,7 +565,7 @@ const App: React.FC = () => {
       </div>
 
       {/* LangChain Information Section */}
-      <div className="bg-light py-5" ref={infoRef} id="info-section">
+      <div className="bg-light py-5" ref={infoRef} id="info-section" style={{marginLeft:"5px",marginRight:"25px"}}>
         <div className="container">
           <div className="row justify-content-center mb-5">
             <div className="col-md-10 text-center">
@@ -862,7 +868,7 @@ const App: React.FC = () => {
           <div className="row">
             <div className="col-12 text-center">
               <p className="small text-white-50 mb-0">
-                © 2025 AI SQL Query System | Powered by LangChain
+                © 2025 AI SQL Query System | Powered by Jahanzaib using LangChain
               </p>
             </div>
           </div>
