@@ -169,6 +169,7 @@ const App: React.FC = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    
     const fetchTables = async () => {
       try {
         const response = await axios.get("http://localhost:8000/tables/");
@@ -368,8 +369,9 @@ const App: React.FC = () => {
       <div className="col-lg-7 col-md-6 mb-4 mb-md-0">
         <h1 className="display-4 fw-bold mb-4">AI-Powered SQL Assistant</h1>
         <p className="lead mb-4">
+          "Lang" stands for Language Models (like GPT, Llama, Claude)."Chain" represents chaining together multiple    components (models, prompts, tools, memory, APIs) to create powerful applications.
           Transform natural language into powerful SQL queries with our LangChain-powered intelligence.
-          No more complex SQL syntax - just ask questions in plain English.
+          No more complex SQL syntax - just ask questions in plain English with accurate column name.
         </p>
         <div className="d-flex flex-wrap gap-2">
           <button 
