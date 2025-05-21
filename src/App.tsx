@@ -253,11 +253,13 @@ const App: React.FC = () => {
 
     try {
       //const response = await axios.post("http://localhost:8000/ask/", {
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ask/`);
-
-        query: question,
-        table_name: selectedTable,
-      });
+      const response = await axios.post(
+  `${import.meta.env.VITE_API_BASE_URL}/ask/`,
+  {
+    query: question,
+    table_name: selectedTable,
+  }
+);
 
       if (response.data.answer && (Array.isArray(response.data.answer) || typeof response.data.answer === 'object')) {
         setAnswer(response.data.answer);
