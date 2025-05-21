@@ -166,11 +166,11 @@ const App: React.FC = () => {
   // const homeRef = useRef<HTMLDivElement>(null);
   const homeRef = useRef<HTMLDivElement | null>(null);
 
-  const queryRef = useRef<HTMLDivElement | null>(null);
+  const queryRef =  useRef<HTMLDivElement | null>(null);
 
-  const infoRef =useRef<HTMLDivElement | null>(null);
+  const infoRef = useRef<HTMLDivElement | null>(null);
 
-  const aboutRef =useRef<HTMLDivElement | null>(null);
+  const aboutRef = useRef<HTMLDivElement | null>(null);
 
 
   useEffect(() => {
@@ -284,17 +284,16 @@ const App: React.FC = () => {
     }
   };
 
-  const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>, sectionName: string) => {
-    if (sectionRef.current) {
-      const headerOffset = 70; // Account for fixed header
-      const elementPosition = sectionRef.current.offsetTop;
-      const offsetPosition = elementPosition - headerOffset;
+  const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement | null>, sectionName: string) => {
+  if (sectionRef.current) {
+    const headerOffset = 70; // Account for fixed header
+    const elementPosition = sectionRef.current.offsetTop;
+    const offsetPosition = elementPosition - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
       setActiveSection(sectionName);
       setNavbarCollapsed(true);
     }
