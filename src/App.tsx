@@ -1,154 +1,3 @@
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
-// const App: React.FC = () => {
-//   const [question, setQuestion] = useState<string>("");
-//   const [answer, setAnswer] = useState<any | null>(null); // Supports both array & object responses
-//   const [tables, setTables] = useState<string[]>([]);
-//   const [selectedTable, setSelectedTable] = useState<string>("");
-//   const [loading, setLoading] = useState<boolean>(false);
-
-//   useEffect(() => {
-//     const fetchTables = async () => {
-//       try {
-//         const response = await axios.get("http://localhost:8000/tables/");
-//         setTables(response.data.tables);
-//         if (response.data.tables.length > 0) {
-//           setSelectedTable(response.data.tables[0]);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching tables:", error);
-//       }
-//     };
-
-//     fetchTables();
-//   }, []);
-
-//   const handleAsk = async () => {
-//     if (!selectedTable) {
-//       setAnswer(null);
-//       return;
-//     }
-
-//     setLoading(true);
-//     setAnswer(null);
-
-//     try {
-//       const response = await axios.post("http://localhost:8000/ask/", {
-//         query: question,
-//         table_name: selectedTable,
-//       });
-
-//       setAnswer(response.data.answer);
-//     } catch (error) {
-//       console.error("Error:", error);
-//       setAnswer(null);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", width: "1000px" }}>
-//       <div className="card shadow p-4" style={{ width: "80%", maxWidth: "1000px" }}>
-//         <h2 className="text-center text-primary mb-4">Langchain Based AI SQL Query System</h2>
-
-//         <div className="mb-3">
-//           <label className="form-label fw-bold">Select Table:</label>
-//           <select className="form-select" value={selectedTable} onChange={(e) => setSelectedTable(e.target.value)}>
-//             {tables.map((table, index) => (
-//               <option key={index} value={table}>{table}</option>
-//             ))}
-//           </select>
-//         </div>
-
-//         <div className="mb-3">
-//           <input
-//             type="text"
-//             className="form-control"
-//             placeholder="Ask a SQL-related question..."
-//             value={question}
-//             onChange={(e) => setQuestion(e.target.value)}
-//           />
-//         </div>
-
-//         <button onClick={handleAsk} className="btn btn-primary w-100 mb-3" disabled={loading}>
-//           {loading ? (
-//             <>
-//               <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-//               Asking...
-//             </>
-//           ) : (
-//             "Ask"
-//           )}
-//         </button>
-
-//         {loading && (
-//           <div className="d-flex justify-content-center">
-//             <div className="spinner-border text-primary" role="status">
-//               <span className="visually-hidden">Loading...</span>
-//             </div>
-//           </div>
-//         )}
-
-//         {!loading && answer && (
-//           <div className="alert alert-secondary mt-3">
-//             <h5 className="fw-bold">Answer:</h5>
-
-//             {/* ✅ If multiple tables are returned, render them separately */}
-//             {selectedTable === "All Tables" && typeof answer === "object" ? (
-//               Object.keys(answer).map((tableName, index) => (
-//                 <div key={index} className="mb-4">
-//                   <h5 className="text-success">{tableName}</h5>
-//                   <table className="table table-striped">
-//                     <thead>
-//                       <tr>
-//                         {answer[tableName].length > 0 &&
-//                           Object.keys(answer[tableName][0]).map((key, idx) => <th key={idx}>{key}</th>)}
-//                       </tr>
-//                     </thead>
-//                     <tbody>
-//                       {answer[tableName].map((row: any, rowIndex: number) => (
-//                         <tr key={rowIndex}>
-//                           {Object.values(row).map((value, colIndex) => (
-//                             <td key={colIndex}>{value}</td>
-//                           ))}
-//                         </tr>
-//                       ))}
-//                     </tbody>
-//                   </table>
-//                 </div>
-//               ))
-//             ) : (
-//               // ✅ If a single table is returned, render normally
-//               <table className="table table-striped">
-//                 <thead>
-//                   <tr>
-//                     {answer.length > 0 && Object.keys(answer[0]).map((key, index) => <th key={index}>{key}</th>)}
-//                   </tr>
-//                 </thead>
-//                 <tbody>
-//                   {answer.map((row, rowIndex) => (
-//                     <tr key={rowIndex}>
-//                       {Object.values(row).map((value, colIndex) => (
-//                         <td key={colIndex}>{value}</td>
-//                       ))}
-//                     </tr>
-//                   ))}
-//                 </tbody>
-//               </table>
-//             )}
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default App;
-
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -162,24 +11,16 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [navbarCollapsed, setNavbarCollapsed] = useState<boolean>(true);
   const [activeSection, setActiveSection] = useState<string>("home");
-  
-  // const homeRef = useRef<HTMLDivElement>(null);
+
   const homeRef = useRef<HTMLDivElement | null>(null);
-
-  const queryRef =  useRef<HTMLDivElement | null>(null);
-
+  const queryRef = useRef<HTMLDivElement | null>(null);
   const infoRef = useRef<HTMLDivElement | null>(null);
-
   const aboutRef = useRef<HTMLDivElement | null>(null);
 
-
   useEffect(() => {
-    
     const fetchTables = async () => {
       try {
-        // const response = await axios.get("http://localhost:8000/tables/");
         const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tables/`);
-
         setTables(response.data.tables);
         if (response.data.tables.length > 0) {
           setSelectedTable(response.data.tables[0]);
@@ -192,17 +33,13 @@ const App: React.FC = () => {
 
     fetchTables();
 
-    // Add scroll event listener to update active section
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Offset to trigger earlier
-      
-      // Get positions of all sections
-     // const homePosition = homeRef.current?.offsetTop || 0;
-      const queryPosition = queryRef.current?.offsetTop || 0;
-      const infoPosition = infoRef.current?.offsetTop || 0;
+      const scrollPosition = window.scrollY + 100; // Offset for earlier trigger
+
       const aboutPosition = aboutRef.current?.offsetTop || 0;
-      
-      // Determine which section is currently in view
+      const infoPosition = infoRef.current?.offsetTop || 0;
+      const queryPosition = queryRef.current?.offsetTop || 0;
+
       if (scrollPosition >= aboutPosition) {
         setActiveSection("about");
       } else if (scrollPosition >= infoPosition) {
@@ -214,25 +51,23 @@ const App: React.FC = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    
-    // Add resize handler for responsiveness
+    window.addEventListener("scroll", handleScroll);
+
     const handleResize = () => {
-      // Reset navbar collapsed state on desktop
       if (window.innerWidth >= 992) {
         setNavbarCollapsed(true);
       }
     };
-    
-    window.addEventListener('resize', handleResize);
-    
-    // Call once on initial load
+
+    window.addEventListener("resize", handleResize);
+
+    // Initial calls
     handleScroll();
     handleResize();
-    
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -251,48 +86,41 @@ const App: React.FC = () => {
     setAnswer(null);
     setError(null);
 
-    
-  try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/ask/`,
-      {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ask/`, {
         query: question,
         table_name: selectedTable,
+      });
+
+      if (response.data.answer && (Array.isArray(response.data.answer) || typeof response.data.answer === "object")) {
+        setAnswer(response.data.answer);
+
+        // Scroll to results
+        setTimeout(() => {
+          if (queryRef.current) {
+            const resultsPosition = queryRef.current.offsetTop + 300;
+            window.scrollTo({
+              top: resultsPosition,
+              behavior: "smooth",
+            });
+          }
+        }, 300);
+      } else {
+        setError("Received an invalid response format");
       }
-    );
-
-    if (
-      response.data.answer &&
-      (Array.isArray(response.data.answer) || typeof response.data.answer === "object")
-    ) {
-      setAnswer(response.data.answer);
-      // Scroll to results
-      setTimeout(() => {
-        if (queryRef.current) {
-          const resultsPosition = queryRef.current.offsetTop + 300;
-          window.scrollTo({
-            top: resultsPosition,
-            behavior: "smooth",
-          });
-        }
-      }, 300);
-    } else {
-      setError("Received an invalid response format");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    setError("Failed to get a response. Please try again later.");
-  } finally {
-    setLoading(false);
-  }
-};
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleAsk();
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to get a response. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAsk();
+    }
+  };
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement | null>, sectionName: string) => {
   if (sectionRef.current) {
     const headerOffset = 70; // Account for fixed header
