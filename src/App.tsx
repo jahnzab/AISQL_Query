@@ -233,7 +233,7 @@ const App: React.FC = () => {
       </div>
       <div className="col-lg-5 col-md-6 text-center">
         <img 
-          src="http://localhost:8000/images/visua.png" 
+          src="/visua.png" 
           alt="AI Query Visualization" 
           className="img-fluid rounded shadow-lg"
           style={{ maxWidth: '100%', height: 'auto',marginRight:"-25px" }}
@@ -485,7 +485,7 @@ const App: React.FC = () => {
                     </div>
                     <div className="col-md-6 text-center">
                       <img 
-                        src="http://localhost:8000/images/ff.png" 
+                        src="/ff.png" 
                         alt="LangChain Framework" 
                         className="img-fluid rounded shadow"
                         style={{ maxWidth: '100%', height: 'auto' }}
@@ -514,7 +514,7 @@ const App: React.FC = () => {
           <div className="row align-items-center">
             <div className="col-lg-6 mb-4 mb-lg-0 order-2 order-lg-1">
               <img 
-                src="http://localhost:8000/images/framework.png" 
+                src="/framework.png" 
                 alt="How LangChain Works" 
                 className="img-fluid rounded shadow d-none d-lg-block"
                 style={{ maxWidth: '100%', height: 'auto' }}
