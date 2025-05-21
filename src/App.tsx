@@ -145,7 +145,7 @@ const App: React.FC = () => {
       <div className="container-fluid p-0 m-0" style={{ width: "100vw", maxWidth: "100vw" }}>
   
           <a className="navbar-brand d-flex align-items-center" href="#" onClick={() => scrollToSection(homeRef, "home")}>
-            <img src="http://localhost:8000/images/langs.png"  alt="LangChain SQL" className="me-2" style={{ borderRadius: '8px', maxWidth:"100%", marginLeft:"10px"}} />
+            <img src="/langs.png"  alt="LangChain SQL" className="me-2" style={{ borderRadius: '8px', maxWidth:"100%", marginLeft:"10px"}} />
             {/* <h1><span className="d-none d-sm-inline"></span></h1> */}
             {/* <span className="d-inline d-sm-none">LC SQL</span> */}
           </a>
