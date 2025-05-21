@@ -135,7 +135,6 @@ const App: React.FC = () => {
       setNavbarCollapsed(true);
     }
   };
-
   return (
     <div className="d-flex flex-column min-vh-100 w-100" style={{ marginRight:"5px", marginLeft:"5px", width: "100vw", maxWidth: "100vw" }}>
 
