@@ -516,7 +516,7 @@ const App: React.FC = () => {
               <img 
                 src="/framework.png" 
                 alt="How LangChain Works" 
-                className="img-fluid rounded shadow d-none d-lg-block"
+                className="img-fluid rounded shadow"
                 style={{ maxWidth: '100%', height: 'auto' }}
               />
              
