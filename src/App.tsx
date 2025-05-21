@@ -177,7 +177,9 @@ const App: React.FC = () => {
     
     const fetchTables = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/tables/");
+        // const response = await axios.get("http://localhost:8000/tables/");
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tables/`);
+
         setTables(response.data.tables);
         if (response.data.tables.length > 0) {
           setSelectedTable(response.data.tables[0]);
@@ -250,7 +252,9 @@ const App: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/ask/", {
+      //const response = await axios.post("http://localhost:8000/ask/", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ask/`);
+
         query: question,
         table_name: selectedTable,
       });
