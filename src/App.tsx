@@ -251,38 +251,41 @@ const App: React.FC = () => {
     setAnswer(null);
     setError(null);
 
-    try {
-      //const response = await axios.post("http://localhost:8000/ask/", {
-      const response = await axios.post(
-  `${import.meta.env.VITE_API_BASE_URL}/ask/`,
-  {
-    query: question,
-    table_name: selectedTable,
-  }
-);
-
-      if (response.data.answer && (Array.isArray(response.data.answer) || typeof response.data.answer === 'object')) {
-        setAnswer(response.data.answer);
-        // Scroll to results
-        setTimeout(() => {
-          if (queryRef.current) {
-            const resultsPosition = queryRef.current.offsetTop + 300;
-            window.scrollTo({
-              top: resultsPosition,
-              behavior: 'smooth'
-            });
-          }
-        }, 300);
-      } else {
-        setError("Received an invalid response format");
+    
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/ask/`,
+      {
+        query: question,
+        table_name: selectedTable,
       }
-    } catch (error) {
-      console.error("Error:", error);
-      setError("Failed to get a response. Please try again later.");
-    } finally {
-      setLoading(false);
+    );
+
+    if (
+      response.data.answer &&
+      (Array.isArray(response.data.answer) || typeof response.data.answer === "object")
+    ) {
+      setAnswer(response.data.answer);
+      // Scroll to results
+      setTimeout(() => {
+        if (queryRef.current) {
+          const resultsPosition = queryRef.current.offsetTop + 300;
+          window.scrollTo({
+            top: resultsPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 300);
+    } else {
+      setError("Received an invalid response format");
     }
-  };
+  } catch (error) {
+    console.error("Error:", error);
+    setError("Failed to get a response. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
