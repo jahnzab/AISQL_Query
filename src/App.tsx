@@ -163,10 +163,15 @@ const App: React.FC = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState<boolean>(true);
   const [activeSection, setActiveSection] = useState<string>("home");
   
-  const homeRef = useRef<HTMLDivElement>(null);
-  const queryRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
+  // const homeRef = useRef<HTMLDivElement>(null);
+  const homeRef = useRef<HTMLDivElement | null>(null);
+
+  const queryRef = useRef<HTMLDivElement | null>(null);
+
+  const infoRef =useRef<HTMLDivElement | null>(null);
+
+  const aboutRef =useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     
