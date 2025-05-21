@@ -195,7 +195,7 @@ const App: React.FC = () => {
       const scrollPosition = window.scrollY + 100; // Offset to trigger earlier
       
       // Get positions of all sections
-      const homePosition = homeRef.current?.offsetTop || 0;
+     // const homePosition = homeRef.current?.offsetTop || 0;
       const queryPosition = queryRef.current?.offsetTop || 0;
       const infoPosition = infoRef.current?.offsetTop || 0;
       const aboutPosition = aboutRef.current?.offsetTop || 0;
